@@ -196,11 +196,11 @@ El análisis permitió concluir que la estructura trabaja con margen de segurida
 <table align="center">
   <tr>
     <td align="center">
-      <img src="imagenes/fea_reacciones.png" alt="Configuración de cargas y reacciones (FEA)" width="400"><br>
+      <img src="imagenes/fea_reacciones.png" alt="Configuración de cargas y reacciones (FEA)" width="500"><br>
       <em>Configuración de cargas y reacciones</em>
     </td>
     <td align="center">
-      <img src="imagenes/fea_deformacion.png" alt="Resultado de deformación (FEA)" width="400"><br>
+      <img src="imagenes/fea_deformacion.png" alt="Resultado de deformación (FEA)" width="500"><br>
       <em>Resultado de deformación – criterio comparativo</em>
     </td>
   </tr>
@@ -274,25 +274,42 @@ anexos/      → Documentación complementaria
 ## 📦 Archivos incluidos
 
 ### PLC
-- `plc/*.cxp` → Proyecto principal de PLC (CX-Programmer).
-- `plc/*.bak` → Backups históricos del proyecto.
-- `plc/*.opt` → Configuraciones/opciones del proyecto (si aplica).
-- `plc/*.pdf` → Exportaciones en PDF del programa (automático / manuales / general).
+- `plc/PLC_Paletizadora.cxp` → Proyecto principal de PLC (Omron CX-Programmer).
+- `plc/PLC_Paletizadora.bak` → Backup del proyecto.
+- `plc/PLC_Paletizadora.opt` → Archivo de opciones/configuración del proyecto.
+- `plc/Simbolos.pdf` → Listado de símbolos del programa PLC.
+- `plc/Backup 17112025/` → Carpeta con respaldo histórico del proyecto:
+  - `PLC_Paletizadora.cxp`
+  - `PLC_Paletizadora.bak`
+  - `PLC_Paletizadora.cxt`
+  - `PLC_Paletizadora.opt`
 
 ### HMI
-- `hmi/*.ipp` → Proyecto HMI (CX-Designer).
-- `hmi/*.png` / `hmi/*.jpg` → Capturas de pantalla de la interfaz.
+- `hmi/Pantalla_paletizadora_ver3.IPP` → Proyecto HMI (Omron CX-Designer).
+- `hmi/Pantalla_paletizadora_ver3/` → Carpeta asociada al proyecto HMI.
+- `hmi/*.jpg` → Imágenes y recursos gráficos utilizados en la interfaz (logos, fondos, etc.).
 
 ### Mecánica
-- `mecanica/*.SLDPRT` / `mecanica/*.SLDASM` → Modelos CAD (SolidWorks).
-- `mecanica/*` (Simulation) → Archivos asociados a simulación (resultados y configuraciones).
-- `mecanica/*.pdf` → Reportes/exportaciones de simulación y resultados.
-- `mecanica/*.png` / `mecanica/*.jpg` → Capturas (cargas, restricciones, tensiones, deformaciones).
+- `mecanica/Prensa.SLDASM` → Ensamble principal del conjunto de la prensa lateral.
+- `mecanica/Placa.SLDPRT` → Placa estructural de la prensa.
+- `mecanica/Horquilla.SLDPRT` → Horquilla del mecanismo.
+- `mecanica/Orejetas.SLDPRT` → Orejetas de fijación.
+- `mecanica/Prensa-EST_2_Presion_bolsas_cemento.SL3` → Estudio estático (SolidWorks Simulation).
+- `mecanica/Prensa-Análisis estático 2.SL3` → Análisis estático complementario.
 
 ### Documentación
-- `docs/*.pdf` → Informe final de la PPS.
-- `anexos/*.pdf` → Catálogos, fichas técnicas, documentación complementaria.
-- `imagenes/*` → Imágenes utilizadas en este README.
+- `docs/PPS_SALTO.pdf` → Informe final de la Práctica Profesional Supervisada.
+- `anexos/Funcionam-Paletizadora-Preliminar.pdf` → Descripción funcional preliminar del equipo.
+- `anexos/PLC_Paletizadora_2025_General.pdf` → Documentación general del programa PLC.
+- `anexos/PLC_Paletizadora_2025_Manuales.pdf` → Manuales y referencias del sistema.
+- `anexos/PLC_Paletizadora_2025_Salidas_auto.pdf` → Salidas automáticas del PLC.
+
+### Imágenes
+- `imagenes/*` → Imágenes utilizadas en este README (fotografías, croquis, capturas y resultados FEA).
+
+### Otros
+- `.gitignore` → Configuración de exclusión de archivos para Git.
+- `README.md` → Documentación principal del repositorio.
 
 ---
 
