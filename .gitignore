@@ -1,0 +1,16 @@
+# SolidWorks temporales
+*.CWR
+*.GSZ
+*.MFC
+*.BD2
+*.BDF
+*.DF1
+*.DF2
+*.PerformanceLog
+
+# Logs
+*.log
+
+# Archivos temporales
+~$*
+*.tmp
