@@ -1,4 +1,4 @@
-<h1 align="center" style="color:black;">
+<h1 align="center">
   Control Mecatrónico de Prensa Lateral en Paletizadora Industrial
 </h1>
 
