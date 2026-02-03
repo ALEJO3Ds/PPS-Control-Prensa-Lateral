@@ -34,7 +34,8 @@ Este repositorio documenta el desarrollo de una **Práctica Profesional Supervis
 La mejora consistió en incorporar un **modo de prensado limitado** configurable desde HMI mediante un **sensor magnético ON/OFF (IFM MR0120)**, manteniendo la **secuencia** y **temporizaciones originales** del ciclo.
 
 <p align="center">
-  <img src="imagenes/prensa_contexto.jpg" alt="Prensa en paletizadora" width="520">
+  <img src="imagenes/prensa_contexto.jpg" alt="Prensa en paletizadora" width="520"><br>
+  <em>Prensa lateral neumática integrada en la paletizadora industrial</em>
 </p>
 
 ---
@@ -62,13 +63,14 @@ La solución permite detener el avance del cilindro en una posición intermedia 
 - **Sensor agregado:** IFM MR0120 (magnético ON/OFF)
 
 <p align="center">
-  <b>Conjunto mecánico de la prensa lateral</b>
+  <b>Conjunto mecánico de la prensa lateral</b><br>
+  <em>Comparación entre implementación real y croquis/esquema del mecanismo</em>
 </p>
 
 <table align="center">
   <tr>
     <td align="center">
-      <img src="imagenes/mecanismo_prensa.jpg" alt="Prensa lateral" width="320"><br>
+      <img src="imagenes/mecanismo_prensa.jpg" alt="Implementación real de la prensa lateral" width="320"><br>
       <em>Implementación real en paletizadora</em>
     </td>
     <td align="center">
@@ -77,7 +79,6 @@ La solución permite detener el avance del cilindro en una posición intermedia 
     </td>
   </tr>
 </table>
-
 
 ---
 
@@ -119,7 +120,8 @@ La solución permite detener el avance del cilindro en una posición intermedia 
 - En LIMITADO, al activarse el sensor se impide continuar el avance.
 
 <p align="center">
-  <img src="imagenes/rung_y12_y34.png" alt="Rungs principales (avance/retorno)" width="700">
+  <img src="imagenes/rung_y12_y34.png" alt="Rungs principales (avance/retorno)" width="700"><br>
+  <em>Rungs principales asociados a avance (Y12) y retroceso (Y34) de la prensa lateral</em>
 </p>
 
 **Retroceso (Y34):**
@@ -138,7 +140,8 @@ Se agregaron dos botones con indicación por lámpara:
 - **Prensa LIMITADA:** escribe `1` en `HOST3:00610.09`
 
 <p align="center">
-  <img src="imagenes/hmi_modo.png" alt="HMI - Selección FULL/LIMITADO" width="520">
+  <img src="imagenes/hmi_modo.png" alt="HMI - Selección FULL/LIMITADO" width="520"><br>
+  <em>Pantalla HMI con selección de modo FULL / LIMITADO para la prensa lateral</em>
 </p>
 
 ---
@@ -148,7 +151,8 @@ Se agregaron dos botones con indicación por lámpara:
 El sensor IFM MR0120 se monta sobre el cuerpo del cilindro y detecta el imán del pistón en una posición intermedia definida en la puesta a punto.
 
 <p align="center">
-  <img src="imagenes/sensor_mr0120.jpg" alt="Sensor montado en cilindro" width="520">
+  <img src="imagenes/sensor_mr0120.jpg" alt="Sensor montado en cilindro" width="520"><br>
+  <em>Sensor IFM MR0120 instalado sobre el cilindro neumático (detección magnética ON/OFF)</em>
 </p>
 
 **Conexión eléctrica (lógica PLC):**
@@ -190,7 +194,8 @@ Se calculó la fuerza de avance del cilindro a 6,5 bar y se verificó el conjunt
 El análisis permitió concluir que la estructura trabaja con margen de seguridad y que el fenómeno de sobreprensado se relaciona principalmente con el recorrido impuesto y la compresibilidad del producto.
 
 <p align="center">
-  <b>Análisis por elementos finitos (FEA)</b>
+  <b>Análisis por elementos finitos (FEA)</b><br>
+  <em>Condiciones de contorno y resultado de deformación del conjunto bajo carga</em>
 </p>
 
 <table align="center">
@@ -200,24 +205,23 @@ El análisis permitió concluir que la estructura trabaja con margen de segurida
       <em>Configuración de cargas y reacciones</em>
     </td>
     <td align="center">
-      <img src="imagenes/fea_deformacion.png" alt="Resultado de deformación (FEA)" width="500"><br>
+      <img src="imagenes/fea_deformacion.png" alt="Resultado de deformación (FEA)" width="520"><br>
       <em>Resultado de deformación – criterio comparativo</em>
     </td>
   </tr>
 </table>
-
 
 ---
 
 ## 📁 Estructura del repositorio
 
 ```text
+anexos/      → Documentación complementaria (PDFs)
 docs/        → Informe final (PPS)
-plc/         → Proyecto PLC (.cxp) + backups (.bak) + config (.opt) + PDFs
-hmi/         → Proyecto HMI (.ipp) + capturas
-mecanica/    → Modelos CAD (fuente)
-imagenes/    → Imágenes utilizadas en este README y mas
-anexos/      → Documentación complementaria
+hmi/         → Proyecto HMI (.IPP) + recursos
+imagenes/    → Imágenes utilizadas en este README
+mecanica/    → Modelos CAD y estudios de simulación
+plc/         → Proyecto PLC (.cxp) + backups y archivos asociados
 ```
 
 ---
@@ -227,7 +231,7 @@ anexos/      → Documentación complementaria
 ### PLC (Omron CJ2M – CX-Programmer)
 1. Abrí **CX-Programmer**.
 2. Ir a **File → Open…** y seleccioná el archivo del proyecto:
-   - `plc/*.cxp`
+   - `plc/PLC_Paletizadora.cxp`
 3. (Opcional) Si necesitás ver el hardware configurado:
    - **PLC → I/O Table and Unit Setup** (o “Tabla de E/S” según versión).
 4. Para revisar la lógica modificada:
@@ -250,7 +254,7 @@ anexos/      → Documentación complementaria
 ### HMI (Omron NS5 – CX-Designer)
 1. Abrí **CX-Designer**.
 2. Ir a **File → Open…** y seleccioná:
-   - `hmi/*.ipp`
+   - `hmi/Pantalla_paletizadora_ver3.IPP`
 3. Navegar a la pantalla modificada:
    - **Pantalla 0011 – Programa**
 4. Verificar los objetos agregados:
@@ -310,7 +314,6 @@ anexos/      → Documentación complementaria
 ### Otros
 - `.gitignore` → Configuración de exclusión de archivos para Git.
 - `README.md` → Documentación principal del repositorio.
-
 ---
 
 ## 👤 Autor
