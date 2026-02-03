@@ -1,0 +1,23 @@
+Cinta Inclinada
+Cinta aplanado Superior
+Cinta Programada
+Tope de giro
+Rodillos superiores
+Pala (válvula)
+Avanzar carro pala
+Retroceder carro pala
+Prensa lateral (válvula)
+Abrir Compuerta
+Cerrar compuerta
+Elevador Subir
+Elevador Bajar
+Puas entrar (válvula)
+Puas salir (válvula)
+Puas Subir (válvula)
+Puas bajar (válvula)
+Rodillos pallets
+Centrado Pallets (válvula)
+Cinta programada-alinear (válvula)
+Barrera(válvula)
+Rodillos pallets vacíos
+Rodillos film
