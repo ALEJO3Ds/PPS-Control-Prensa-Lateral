@@ -3,6 +3,12 @@
 **Práctica Profesional Supervisada – Ingeniería Mecatrónica**  
 **Universidad Nacional de Lomas de Zamora – Facultad de Ingeniería**
 
+<!-- (Opcional) Logo
+<p align="left">
+  <img src="imagenes/logo_fiunlz.png" width="280">
+</p>
+-->
+
 ---
 
 ## 📑 Índice
@@ -25,15 +31,19 @@
 
 ## 📌 Introducción
 
-Este repositorio documenta el desarrollo de una PPS realizada sobre un equipo industrial real: una **paletizadora automática** equipada con una **prensa lateral neumática**.  
-La mejora consistió en incorporar un **modo de prensado limitado** configurable desde HMI, manteniendo la secuencia y temporizaciones originales del ciclo.
+Este repositorio documenta el desarrollo de una **Práctica Profesional Supervisada (PPS)** realizada sobre un equipo industrial real: una **paletizadora automática** equipada con una **prensa lateral neumática**.
 
+La mejora consistió en incorporar un **modo de prensado limitado** configurable desde HMI mediante un **sensor magnético ON/OFF (IFM MR0120)**, manteniendo la **secuencia** y **temporizaciones originales** del ciclo.
+
+📷 **Vista general del equipo / zona de prensado**  
+![Prensa en paletizadora](imagenes/prensa_contexto.jpg)
 
 ---
 
 ## 🎯 Objetivo
 
-Implementé una mejora de control para **limitar el recorrido del cilindro neumático** en función del producto, sin modificar:
+Implementé una mejora de control para **limitar el recorrido del cilindro neumático** según necesidad operativa, sin modificar:
+
 - la secuencia automática existente,
 - las temporizaciones originales del ciclo,
 - el comportamiento manual ya validado.
@@ -52,7 +62,11 @@ La solución permite detener el avance del cilindro en una posición intermedia 
 - **Electroválvula:** 5/3 centro cerrado  
 - **Sensor agregado:** IFM MR0120 (magnético ON/OFF)
 
-📷 **[Croquis/visión superior de la capa y zona de contacto]**
+📷 **Zona de contacto efectiva (vista superior / capa prensada)**  
+![Zona de contacto](imagenes/capa_contacto.jpg)
+
+📷 **(Opcional) Conjunto / croquis mecánico**  
+![Mecanismo prensa](imagenes/mecanismo_prensa.jpg)
 
 ---
 
@@ -88,17 +102,16 @@ La solución permite detener el avance del cilindro en una posición intermedia 
 **Cálculo del bloqueo:**
 - `BLOQUEO_PRENSA_LIMIT = PRENSA_MODO_LIMITADO AND S_PRENSA_LIMIT`
 
-**Acción sobre el avance:**
-- Se agregó `NOT BLOQUEO_PRENSA_LIMIT` en los rungs que energizan el avance de la prensa (salida Y12).
+**Acción sobre el avance (Y12):**
+- Se agregó `NOT BLOQUEO_PRENSA_LIMIT` en los rungs que energizan el avance.
 - En FULL, la lógica queda equivalente al programa original.
 - En LIMITADO, al activarse el sensor se impide continuar el avance.
 
-📷 **[Rung de Y12 con el contacto NOT BLOQUEO_PRENSA_LIMIT]**
+📷 **Rungs principales (avance/retorno) – referencia visual**  
+![Rung Y12/Y34](imagenes/rung_y12_y34.png)
 
 **Retroceso (Y34):**
 - Se mantuvo el criterio del ciclo existente, evitando dobles mandos y conservando la secuencia validada.
-
-📷 **[Rung de Y34 / lógica de retorno]**
 
 ---
 
@@ -112,7 +125,8 @@ Se agregaron dos botones con indicación por lámpara:
 - **Prensa FULL:** escribe `0` en `HOST3:00610.09`
 - **Prensa LIMITADA:** escribe `1` en `HOST3:00610.09`
 
-📷 **[Pantalla HMI con botones FULL/LIMITADO]**
+📷 **Pantalla HMI (selección FULL / LIMITADO)**  
+![HMI](imagenes/hmi_modo.png)
 
 ---
 
@@ -120,16 +134,20 @@ Se agregaron dos botones con indicación por lámpara:
 
 El sensor IFM MR0120 se monta sobre el cuerpo del cilindro y detecta el imán del pistón en una posición intermedia definida en la puesta a punto.
 
+📷 **Sensor montado en cilindro**  
+![Sensor MR0120](imagenes/sensor_mr0120.jpg)
+
 **Conexión eléctrica (lógica PLC):**
 - El sensor se cableó a la **entrada digital CIO 3.14** (`S_PRENSA_LIMIT`).
-- 
-**Conexión física:**
-- **Dirección PLC:** CIO 3.14  
-- **Módulo:** CJ1W-ID211 (DC Input Unit)  
-- **Ubicación:** Bastidor principal – Slot 03  
-- **Borne:** Entrada digital Nº14 del módulo
 
-Esta entrada fue verificada previamente para asegurar que no interfiere con señales existentes del sistema.
+**Conexión física (dónde va el cable):**
+- **PLC:** Omron CJ2M-CPU34  
+- **Módulo de entradas:** **CJ1W-ID211 (DC Input Unit)**  
+- **Ubicación:** Bastidor principal – **Slot 03**  
+- **Borne:** **Entrada digital Nº14** del módulo (asociada a **CIO 3.14**)
+
+> Nota: en Omron, el banco **CIO 3.xx** corresponde al módulo cuyo número de unidad/slot es **03** (16 entradas → 3.00 a 3.15).  
+> Por eso **3.14** refiere a la entrada 14 de ese módulo.
 
 **Recomendaciones de instalación:**
 - Ajustar la posición del sensor según el recorrido máximo deseado.
@@ -157,16 +175,102 @@ Se recomienda instalar una **válvula estranguladora antirretorno** para regular
 Se calculó la fuerza de avance del cilindro a 6,5 bar y se verificó el conjunto mediante simulación estática (tensiones y desplazamientos).  
 El análisis permitió concluir que la estructura trabaja con margen de seguridad y que el fenómeno de sobreprensado se relaciona principalmente con el recorrido impuesto y la compresibilidad del producto.
 
-📷 **[Capturas de von Mises / desplazamiento]**
+📷 **Configuración / reacciones (referencia de carga)**  
+![Reacciones](imagenes/fea_reacciones.png)
+
+📷 **Resultado (deformación / criterio comparativo)**  
+![Deformación](imagenes/fea_deformacion.png)
 
 ---
 
 ## 📁 Estructura del repositorio
 
 ```text
-docs/        → Informe final (PPS)  
-plc/         → Proyecto PLC (.cxp) + backups (.bak) + config (.opt) + PDFs  
-hmi/         → Proyecto HMI (.ipp) + capturas  
-mecanica/    → Modelos CAD y simulaciones (PDF + imágenes)  
-imagenes/    → Imágenes utilizadas en este README  
-anexos/      → Catálogos, planos eléctricos y documentación complementaria  
+docs/        → Informe final (PPS)
+plc/         → Proyecto PLC (.cxp) + backups (.bak) + config (.opt) + PDFs
+hmi/         → Proyecto HMI (.ipp) + capturas
+mecanica/    → Modelos CAD (fuente)
+imagenes/    → Imágenes utilizadas en este README y mas
+anexos/      → Documentación complementaria
+```
+
+---
+
+## 🧰 Cómo abrir y utilizar los proyectos
+
+### PLC (Omron CJ2M – CX-Programmer)
+1. Abrí **CX-Programmer**.
+2. Ir a **File → Open…** y seleccioná el archivo del proyecto:
+   - `plc/*.cxp`
+3. (Opcional) Si necesitás ver el hardware configurado:
+   - **PLC → I/O Table and Unit Setup** (o “Tabla de E/S” según versión).
+4. Para revisar la lógica modificada:
+   - Buscar las señales/símbolos:
+     - `S_PRENSA_LIMIT` (CIO 3.14)
+     - `PRENSA_MODO_LIMITADO` (CIO 610.09)
+     - `BLOQUEO_PRENSA_LIMIT` (W500.00)
+   - Ver rungs de:
+     - `Y12` (EV. SALE PRENSA LATERAL)
+     - `Y34` (EV. ENTRA PRENSA LATERAL)
+5. Si se realiza prueba en banco/planta:
+   - Conectar al PLC (USB/Serial/Ethernet según configuración del equipo).
+   - **Online → Work Online**.
+   - Monitorear el bit `BLOQUEO_PRENSA_LIMIT` y la entrada `CIO 3.14` al accionar el cilindro.
+
+> ⚠️ Importante: este repositorio documenta una mejora sobre un equipo industrial real. Cualquier puesta en marcha debe respetar permisos, procedimientos internos y condiciones de seguridad del área.
+
+
+### HMI (Omron NS5 – CX-Designer)
+1. Abrí **CX-Designer**.
+2. Ir a **File → Open…** y seleccioná:
+   - `hmi/*.ipp`
+3. Navegar a la pantalla modificada:
+   - **Pantalla 0011 – Programa**
+4. Verificar los objetos agregados:
+   - Botón **Prensa FULL** → escribe `0` en `HOST3:00610.09`
+   - Botón **Prensa LIMITADA** → escribe `1` en `HOST3:00610.09`
+   - Lámparas asociadas al estado del bit `610.09`
+
+
+### Sensor IFM MR0120 (montaje y conexión resumida)
+- **Conexión lógica PLC:** `CIO 3.14` (`S_PRENSA_LIMIT`)
+- **Conexión física (según tabla E/S):**
+  - **Módulo:** `CJ1W-ID211` (DC Input Unit)
+  - **Bastidor principal – Slot 03**
+  - **Borne:** **Entrada digital Nº14** del módulo
+
+> 🔧 Recomendación: ajustar una **válvula estranguladora antirretorno** para controlar la velocidad de avance del cilindro y asegurar detección confiable del sensor sin afectar el prensado.
+
+
+---
+
+## 📦 Archivos incluidos
+
+### PLC
+- `plc/*.cxp` → Proyecto principal de PLC (CX-Programmer).
+- `plc/*.bak` → Backups históricos del proyecto.
+- `plc/*.opt` → Configuraciones/opciones del proyecto (si aplica).
+- `plc/*.pdf` → Exportaciones en PDF del programa (automático / manuales / general).
+
+### HMI
+- `hmi/*.ipp` → Proyecto HMI (CX-Designer).
+- `hmi/*.png` / `hmi/*.jpg` → Capturas de pantalla de la interfaz.
+
+### Mecánica
+- `mecanica/*.SLDPRT` / `mecanica/*.SLDASM` → Modelos CAD (SolidWorks).
+- `mecanica/*` (Simulation) → Archivos asociados a simulación (resultados y configuraciones).
+- `mecanica/*.pdf` → Reportes/exportaciones de simulación y resultados.
+- `mecanica/*.png` / `mecanica/*.jpg` → Capturas (cargas, restricciones, tensiones, deformaciones).
+
+### Documentación
+- `docs/*.pdf` → Informe final de la PPS.
+- `anexos/*.pdf` → Catálogos, fichas técnicas, documentación complementaria.
+- `imagenes/*` → Imágenes utilizadas en este README.
+
+
+---
+
+## 👤 Autor
+
+**Alejo Salto**  
+Ingeniería Mecatrónica – Universidad Nacional de Lomas de Zamora (FI-UNLZ)
