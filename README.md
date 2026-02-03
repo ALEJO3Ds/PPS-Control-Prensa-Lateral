@@ -1,169 +1,174 @@
-# Control de Prensa Lateral en Paletizado Industrial
+# PPS – Control Mecatrónico de Prensa Lateral en Paletizadora Industrial
 
-## Práctica Profesional Supervisada – Ingeniería Mecatrónica  
+**Práctica Profesional Supervisada – Ingeniería Mecatrónica**  
 **Universidad Nacional de Lomas de Zamora – Facultad de Ingeniería**
+
+---
+
+## 📌 Índice
+1. [Introducción](#-introducción)
+2. [Objetivo](#-objetivo)
+3. [Sistema intervenido](#-sistema-intervenido)
+4. [Solución implementada](#-solución-implementada)
+   - [Modos FULL / LIMITADO](#-modos-full--limitado)
+   - [PLC – Señales y lógica](#-plc--señales-y-lógica)
+   - [HMI – Selección de modo](#-hmi--selección-de-modo)
+   - [Sensor IFM MR0120 – Montaje y conexión](#-sensor-ifm-mr0120--montaje-y-conexión)
+   - [Consideración neumática](#-consideración-neumática)
+5. [Análisis mecánico](#-análisis-mecánico)
+6. [Estructura del repositorio](#-estructura-del-repositorio)
+7. [Cómo abrir y utilizar los proyectos](#-cómo-abrir-y-utilizar-los-proyectos)
+8. [Archivos incluidos](#-archivos-incluidos)
+9. [Autor](#-autor)
 
 ---
 
 ## 📌 Introducción
 
-Este repositorio documenta el desarrollo de una **Práctica Profesional Supervisada (PPS)** realizada en el marco de la carrera de Ingeniería Mecatrónica.  
-El proyecto consistió en la **mejora del sistema de control de una prensa lateral neumática** integrada a una **paletizadora industrial automática**, mediante la incorporación de un **modo de prensado limitado** configurable desde HMI.
+Este repositorio documenta el desarrollo de una PPS realizada sobre un equipo industrial real: una **paletizadora automática** equipada con una **prensa lateral neumática**.  
+La mejora consistió en incorporar un **modo de prensado limitado** configurable desde HMI, manteniendo la secuencia y temporizaciones originales del ciclo.
 
-La intervención se realizó sobre un **equipo industrial real**, modificando exclusivamente la **lógica de control en PLC** y la **interfaz HMI**, sin rediseñar el equipo ni alterar la secuencia de funcionamiento validada en producción.
-
-📷 **[Paletizadora y prensa lateral en planta]**
 
 ---
 
-## 🎯 Objetivo del proyecto
+## 🎯 Objetivo
 
-Optimizar el control del recorrido del cilindro neumático de la prensa lateral, permitiendo adaptar el prensado sin modificar:
+Implementé una mejora de control para **limitar el recorrido del cilindro neumático** en función del producto, sin modificar:
+- la secuencia automática existente,
+- las temporizaciones originales del ciclo,
+- el comportamiento manual ya validado.
 
-- La secuencia automática del sistema.
-- Las temporizaciones originales del ciclo.
-- El comportamiento manual existente.
-
-La solución implementada permite **detener el avance del cilindro en una posición intermedia**, definida por sensor, **manteniendo la presión durante el tiempo original de prensado**.
-
----
-
-## 🏭 Contexto industrial
-
-El sistema intervenido corresponde a una paletizadora automática ubicada en una planta industrial dedicada a la fabricación de productos para la construcción.  
-La prensa lateral cumple la función de **compactar las bolsas durante el armado del pallet**, asegurando su estabilidad antes del transporte y almacenamiento.
-
-La paletizadora es uno de los equipos más antiguos de la línea, por lo que la mejora debía integrarse **respetando la lógica original**, sin afectar la confiabilidad ni la seguridad del proceso.
+La solución permite detener el avance del cilindro en una posición intermedia definida por sensor, **manteniendo presión durante el tiempo original de prensado**.
 
 ---
 
-## 🧩 Arquitectura del sistema
+## 🏭 Sistema intervenido
 
 - **PLC:** Omron CJ2M-CPU34  
 - **HMI:** Omron NS5  
 - **Software PLC:** CX-Programmer  
 - **Software HMI:** CX-Designer  
-- **Actuador:** Cilindro neumático Micro 0.049.260.300  
+- **Cilindro neumático:** Micro 0.049.260.300 (doble efecto, con imán, carrera 300 mm)  
 - **Electroválvula:** 5/3 centro cerrado  
 - **Sensor agregado:** IFM MR0120 (magnético ON/OFF)
 
+📷 **[Croquis/visión superior de la capa y zona de contacto]**
 
 ---
 
-## ⚙️ Descripción de la solución
+## ⚙️ Solución implementada
 
-Se incorporó un **sensor magnético ON/OFF** sobre el cilindro neumático para detectar una posición intermedia antes del fin de carrera mecánico.  
-A partir de esta señal se implementó un **modo de prensado LIMITADO**, seleccionable desde HMI.
+### 🔹 Modos FULL / LIMITADO
 
-### Modos de funcionamiento
-
-#### 🔹 Modo FULL
-- Funcionamiento idéntico al sistema original.
+**Modo FULL**
+- Comportamiento idéntico al original.
 - El cilindro avanza a carrera completa.
-- El sensor es ignorado por la lógica de control.
+- El sensor es ignorado por lógica.
 
-#### 🔹 Modo LIMITADO
-- El avance del cilindro se detiene al activarse el sensor.
-- Se mantiene la presión durante el tiempo original del ciclo.
-- El retroceso ocurre según la lógica global existente.
-- No se modifican temporizadores ni pasos de secuencia.
-
+**Modo LIMITADO**
+- El avance se detiene cuando el sensor detecta el imán del pistón.
+- Se conserva el tiempo de prensado del ciclo.
+- El retroceso ocurre por la lógica global existente, sin agregar pasos nuevos.
 
 ---
 
-## 🖥️ Configuración PLC
+### 🧠 PLC – Señales y lógica
 
-El programa PLC fue desarrollado en **CX-Programmer**.  
-Los archivos incluidos en este repositorio permiten analizar y reproducir la lógica implementada.
+**Entrada digital (sensor):**
+- `S_PRENSA_LIMIT` → **CIO 3.14**
 
-### Señales utilizadas
+**Bit de modo (desde HMI):**
+- `PRENSA_MODO_LIMITADO` → **CIO 610.09**
+  - `0` = FULL (recorrido completo)
+  - `1` = LIMITADO (recorrido limitado por sensor)
 
-- **Entrada digital:**  
-  - Sensor IFM MR0120 → **CIO 3.14**
+**Bit interno (bloqueo):**
+- `BLOQUEO_PRENSA_LIMIT` → **W500.00**
 
-- **Bit de modo (HMI):**  
-  - Selección FULL / LIMITADO
+**Cálculo del bloqueo:**
+- `BLOQUEO_PRENSA_LIMIT = PRENSA_MODO_LIMITADO AND S_PRENSA_LIMIT`
 
-- **Bit interno:**  
-  - Bloqueo lógico de avance del cilindro
+**Acción sobre el avance:**
+- Se agregó `NOT BLOQUEO_PRENSA_LIMIT` en los rungs que energizan el avance de la prensa (salida Y12).
+- En FULL, la lógica queda equivalente al programa original.
+- En LIMITADO, al activarse el sensor se impide continuar el avance.
 
-🔧 **Nota técnica:**  
-La entrada **CIO 3.14** fue verificada previamente como libre y no asociada a funciones críticas del equipo, garantizando que la incorporación del sensor no interfiera con señales existentes.
+📷 **[Rung de Y12 con el contacto NOT BLOQUEO_PRENSA_LIMIT]**
 
-📷 **[Rungs modificados en el programa PLC]**
+**Retroceso (Y34):**
+- Se mantuvo el criterio del ciclo existente, evitando dobles mandos y conservando la secuencia validada.
 
----
-
-## 🖱️ Configuración HMI
-
-La interfaz de operación fue modificada utilizando **CX-Designer**.  
-El proyecto HMI se encuentra en formato:
-
-- `.ipp`
-
-Se agregó una sección específica en la pantalla de selección de programa para definir el modo de prensado:
-
-- **Prensa FULL:** recorrido completo.
-- **Prensa LIMITADA:** recorrido limitado por sensor.
-
-La selección se realiza mediante botones ON/OFF con indicación por lámpara, manteniendo la estética y estructura original de la pantalla.
-
-📷 **[Pantalla HMI con selección de modo]**
+📷 **[Rung de Y34 / lógica de retorno]**
 
 ---
 
-## 🔌 Integración del sensor IFM MR0120
+### 🖥️ HMI – Selección de modo
 
-El sensor IFM MR0120 se monta directamente sobre el cuerpo del cilindro neumático, detectando el imán del pistón en una posición intermedia definida durante la puesta a punto.
+La pantalla modificada fue **0011 – Programa**.  
+Los Programas 1 y 2 escriben en **DM200** (selección de receta/ciclo), por lo que el modo FULL/LIMITADO se definió como **configuración global** independiente del programa activo.
 
-**Conexión eléctrica:**
-- El sensor se cablea a la **entrada digital CIO 3.14** del PLC.
+Se agregaron dos botones con indicación por lámpara:
+
+- **Prensa FULL:** escribe `0` en `HOST3:00610.09`
+- **Prensa LIMITADA:** escribe `1` en `HOST3:00610.09`
+
+📷 **[Pantalla HMI con botones FULL/LIMITADO]**
+
+---
+
+### 🔌 Sensor IFM MR0120 – Montaje y conexión
+
+El sensor IFM MR0120 se monta sobre el cuerpo del cilindro y detecta el imán del pistón en una posición intermedia definida en la puesta a punto.
+
+**Conexión eléctrica (lógica PLC):**
+- El sensor se cableó a la **entrada digital CIO 3.14** (`S_PRENSA_LIMIT`).
+
+**Aclaración importante (conexión física):**
+- CIO 3.14 es una **dirección lógica**.  
+- El borne físico exacto depende del módulo de entradas instalado y su dirección base.  
+- Para identificar el borne:
+  1. Abrir **I/O Table and Unit Setup** en CX-Programmer.
+  2. Ubicar el módulo de entradas y su rango CIO asignado.
+  3. Identificar el canal que mapea a **CIO 3.14**.
+
+📷 **[Tabla de E/S (I/O Table) o bornera del módulo de entradas]**
 
 **Recomendaciones de instalación:**
 - Ajustar la posición del sensor según el recorrido máximo deseado.
-- Verificar la repetibilidad de la señal antes de habilitar el modo LIMITADO.
-- Asegurar una fijación mecánica firme para evitar desplazamientos por vibración.
-
-📷 **[Ubicación del sensor sobre el cilindro]**
+- Verificar repetibilidad de la señal antes de habilitar el modo LIMITADO.
+- Asegurar fijación mecánica firme para evitar desplazamientos por vibración.
 
 ---
 
-## 🛠️ Consideración neumática adicional
+### ⚠️ Consideración neumática
 
-Se recomienda la utilización de una **válvula estranguladora antirretorno** en la línea de salida del cilindro neumático.
+Se recomienda instalar una **válvula estranguladora antirretorno** para regular la velocidad del cilindro durante el avance.
 
-### Motivo:
-- Evitar que el avance del cilindro sea excesivamente rápido y supere el punto de detección del sensor antes de ser leído por el PLC.
-- Garantizar una lectura confiable del sensor magnético.
-- Mantener un movimiento fluido que asegure el prensado correcto.
+**Motivo:**
+- Evitar que el avance sea tan rápido que supere el punto del sensor antes de ser leído por el PLC.
+- Mejorar confiabilidad de detección sin afectar el prensado.
 
-⚠️ **Ajuste recomendado:**
-- Demasiado abierta → riesgo de sobrepasar el sensor.
-- Demasiado cerrada → riesgo de no alcanzar la presión efectiva de prensado.
-
+**Ajuste recomendado:**
+- Evitar estrangular en exceso (riesgo de no alcanzar el prensado a tiempo).
+- Evitar estrangular de menos (riesgo de sobrepaso del punto de detección).
 
 ---
 
 ## 🧮 Análisis mecánico
 
-Se realizó el cálculo de la fuerza disponible del cilindro neumático y una verificación estructural del conjunto de prensado mediante **simulación estática**.
+Se calculó la fuerza de avance del cilindro a 6,5 bar y se verificó el conjunto mediante simulación estática (tensiones y desplazamientos).  
+El análisis permitió concluir que la estructura trabaja con margen de seguridad y que el fenómeno de sobreprensado se relaciona principalmente con el recorrido impuesto y la compresibilidad del producto.
 
-Los archivos asociados incluyen:
-- Informes en formato `.pdf`
-- Modelos CAD y resultados de simulación (SolidWorks)
-
-El análisis permitió verificar que la estructura trabaja con **amplio margen de seguridad** y que el fenómeno de sobreprensado está asociado al **recorrido impuesto** y no a una insuficiencia de fuerza.
-
-📷 **[Resultados de simulación / tensiones]**
+📷 **[Capturas de von Mises / desplazamiento]**
 
 ---
 
-## 📁 Organización del repositorio
+## 📁 Estructura del repositorio
 
 ```text
-docs/        → Informe final de la PPS  
-plc/         → Programa PLC y backups  
-hmi/         → Proyecto HMI  
-mecanica/    → Modelos CAD y simulaciones estructurales  
-imagenes/    → Imágenes utilizadas en el README  
-anexos/      → Documentación técnica complementaria  
+docs/        → Informe final (PPS)  
+plc/         → Proyecto PLC (.cxp) + backups (.bak) + config (.opt) + PDFs  
+hmi/         → Proyecto HMI (.ipp) + capturas  
+mecanica/    → Modelos CAD y simulaciones (PDF + imágenes)  
+imagenes/    → Imágenes utilizadas en este README  
+anexos/      → Catálogos, planos eléctricos y documentación complementaria  
