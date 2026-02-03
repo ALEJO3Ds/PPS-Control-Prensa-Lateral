@@ -1,13 +1,9 @@
-# PPS – Control Mecatrónico de Prensa Lateral en Paletizadora Industrial
+<h1 align="center" style="color:black;">
+  Control Mecatrónico de Prensa Lateral en Paletizadora Industrial
+</h1>
 
 **Práctica Profesional Supervisada – Ingeniería Mecatrónica**  
 **Universidad Nacional de Lomas de Zamora – Facultad de Ingeniería**
-
-<!-- (Opcional) Logo
-<p align="left">
-  <img src="imagenes/logo_fiunlz.png" width="280">
-</p>
--->
 
 ---
 
@@ -35,8 +31,9 @@ Este repositorio documenta el desarrollo de una **Práctica Profesional Supervis
 
 La mejora consistió en incorporar un **modo de prensado limitado** configurable desde HMI mediante un **sensor magnético ON/OFF (IFM MR0120)**, manteniendo la **secuencia** y **temporizaciones originales** del ciclo.
 
-📷 **Vista general del equipo / zona de prensado**  
-![Prensa en paletizadora](imagenes/prensa_contexto.jpg)
+<p align="center">
+  <img src="images/prensa_contexto.png" alt="Prensa en paletizadora" width="500"/>
+</p>
 
 ---
 
@@ -107,8 +104,9 @@ La solución permite detener el avance del cilindro en una posición intermedia 
 - En FULL, la lógica queda equivalente al programa original.
 - En LIMITADO, al activarse el sensor se impide continuar el avance.
 
-📷 **Rungs principales (avance/retorno) – referencia visual**  
-![Rung Y12/Y34](imagenes/rung_y12_y34.png)
+<p align="center">
+  <img src="images/rung_y12_y34.png" alt="Rungs principales (avance/retorno)" width="500"/>
+</p>
 
 **Retroceso (Y34):**
 - Se mantuvo el criterio del ciclo existente, evitando dobles mandos y conservando la secuencia validada.
@@ -125,8 +123,9 @@ Se agregaron dos botones con indicación por lámpara:
 - **Prensa FULL:** escribe `0` en `HOST3:00610.09`
 - **Prensa LIMITADA:** escribe `1` en `HOST3:00610.09`
 
-📷 **Pantalla HMI (selección FULL / LIMITADO)**  
-![HMI](imagenes/hmi_modo.png)
+<p align="center">
+  <img src="images/hmi_modo.png" alt="HMI" width="400"/>
+</p>
 
 ---
 
@@ -134,8 +133,9 @@ Se agregaron dos botones con indicación por lámpara:
 
 El sensor IFM MR0120 se monta sobre el cuerpo del cilindro y detecta el imán del pistón en una posición intermedia definida en la puesta a punto.
 
-📷 **Sensor montado en cilindro**  
-![Sensor MR0120](imagenes/sensor_mr0120.jpg)
+<p align="center">
+  <img src="images/sensor_mr0120.jpg" alt="Sensor montado en cilindro" width="400"/>
+</p>
 
 **Conexión eléctrica (lógica PLC):**
 - El sensor se cableó a la **entrada digital CIO 3.14** (`S_PRENSA_LIMIT`).
@@ -272,5 +272,9 @@ anexos/      → Documentación complementaria
 
 ## 👤 Autor
 
-**Alejo Salto**  
+**Alejo Daniel Salto**  
 Ingeniería Mecatrónica – Universidad Nacional de Lomas de Zamora (FI-UNLZ)
+
+<p align="center">
+  <img src="images/logo_fiunlz.png" alt="Logo FiUNLZ" width="400"/>
+</p>
