@@ -72,7 +72,7 @@ La solución permite detener el avance del cilindro en una posición intermedia 
       <em>Implementación real en paletizadora</em>
     </td>
     <td align="center">
-      <img src="imagenes/capa_contacto.jpg" alt="Croquis del mecanismo de prensado" width="400"><br>
+      <img src="imagenes/capa_contacto.jpg" alt="Croquis del mecanismo de prensado" width="420"><br>
       <em>Croquis / esquema mecánico</em>
     </td>
   </tr>
@@ -196,11 +196,11 @@ El análisis permitió concluir que la estructura trabaja con margen de segurida
 <table align="center">
   <tr>
     <td align="center">
-      <img src="imagenes/fea_reacciones.png" alt="Configuración de cargas y reacciones (FEA)" width="300"><br>
+      <img src="imagenes/fea_reacciones.png" alt="Configuración de cargas y reacciones (FEA)" width="400"><br>
       <em>Configuración de cargas y reacciones</em>
     </td>
     <td align="center">
-      <img src="imagenes/fea_deformacion.png" alt="Resultado de deformación (FEA)" width="300"><br>
+      <img src="imagenes/fea_deformacion.png" alt="Resultado de deformación (FEA)" width="400"><br>
       <em>Resultado de deformación – criterio comparativo</em>
     </td>
   </tr>
