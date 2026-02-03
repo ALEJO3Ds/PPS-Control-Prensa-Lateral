@@ -120,7 +120,7 @@ La solución permite detener el avance del cilindro en una posición intermedia 
 
 <p align="center">
   <img src="imagenes/rung_y12_y34.png" alt="Rungs principales (avance/retorno)" width="700"><br>
-  <em>Rungs principales asociados a avance (Y12) y retroceso (Y34) de la prensa lateral</em>
+  <em>Rungs principales asociados a avance (Y12) y retroceso (Y34) de la prensa lateral en modo automático</em>
 </p>
 
 **Retroceso (Y34):**
@@ -281,7 +281,7 @@ plc/         → Proyecto PLC (.cxp) + backups y archivos asociados
 - `plc/PLC_Paletizadora.bak` → Backup del proyecto.
 - `plc/PLC_Paletizadora.opt` → Archivo de opciones/configuración del proyecto.
 - `plc/Simbolos.pdf` → Listado de símbolos del programa PLC.
-- `plc/Backup 17112025/` → Carpeta con respaldo histórico del proyecto:
+- `plc/Backup 17112025/` → Carpeta con respaldo histórico del proyecto previo a las modificaciones:
   - `PLC_Paletizadora.cxp`
   - `PLC_Paletizadora.bak`
   - `PLC_Paletizadora.cxt`
