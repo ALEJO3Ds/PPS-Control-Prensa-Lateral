@@ -62,12 +62,22 @@ La solución permite detener el avance del cilindro en una posición intermedia 
 - **Sensor agregado:** IFM MR0120 (magnético ON/OFF)
 
 <p align="center">
-  <img src="imagenes/capa_contacto.jpg" alt="Zona de contacto" width="520">
+  <b>Conjunto mecánico de la prensa lateral</b>
 </p>
 
-<p align="center">
-  <img src="imagenes/mecanismo_prensa.jpg" alt="Mecanismo prensa" width="520">
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="imagenes/mecanismo_prensa.jpg" alt="Prensa lateral" width="320"><br>
+      <em>Implementación real en paletizadora</em>
+    </td>
+    <td align="center">
+      <img src="imagenes/capa_contacto.jpg" alt="Croquis del mecanismo de prensado" width="320"><br>
+      <em>Croquis / esquema mecánico</em>
+    </td>
+  </tr>
+</table>
+
 
 ---
 
