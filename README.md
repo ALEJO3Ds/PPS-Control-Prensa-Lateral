@@ -90,7 +90,7 @@ Los archivos incluidos en este repositorio permiten analizar y reproducir la ló
 🔧 **Nota técnica:**  
 La entrada **CIO 3.14** fue verificada previamente como libre y no asociada a funciones críticas del equipo, garantizando que la incorporación del sensor no interfiera con señales existentes.
 
-📷 **[AQUÍ INSERTAR IMAGEN – Rungs modificados en el programa PLC]**
+📷 **[Rungs modificados en el programa PLC]**
 
 ---
 
