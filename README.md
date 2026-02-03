@@ -5,7 +5,7 @@
 
 ---
 
-## 📌 Índice
+## 📑 Índice
 1. [Introducción](#-introducción)
 2. [Objetivo](#-objetivo)
 3. [Sistema intervenido](#-sistema-intervenido)
@@ -122,16 +122,14 @@ El sensor IFM MR0120 se monta sobre el cuerpo del cilindro y detecta el imán de
 
 **Conexión eléctrica (lógica PLC):**
 - El sensor se cableó a la **entrada digital CIO 3.14** (`S_PRENSA_LIMIT`).
+- 
+**Conexión física:**
+- **Dirección PLC:** CIO 3.14  
+- **Módulo:** CJ1W-ID211 (DC Input Unit)  
+- **Ubicación:** Bastidor principal – Slot 03  
+- **Borne:** Entrada digital Nº14 del módulo
 
-**Aclaración importante (conexión física):**
-- CIO 3.14 es una **dirección lógica**.  
-- El borne físico exacto depende del módulo de entradas instalado y su dirección base.  
-- Para identificar el borne:
-  1. Abrir **I/O Table and Unit Setup** en CX-Programmer.
-  2. Ubicar el módulo de entradas y su rango CIO asignado.
-  3. Identificar el canal que mapea a **CIO 3.14**.
-
-📷 **[Tabla de E/S (I/O Table) o bornera del módulo de entradas]**
+Esta entrada fue verificada previamente para asegurar que no interfiere con señales existentes del sistema.
 
 **Recomendaciones de instalación:**
 - Ajustar la posición del sensor según el recorrido máximo deseado.
