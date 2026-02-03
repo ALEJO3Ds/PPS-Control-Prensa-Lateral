@@ -2,8 +2,10 @@
   Control Mecatrónico de Prensa Lateral en Paletizadora Industrial
 </h1>
 
-**Práctica Profesional Supervisada – Ingeniería Mecatrónica**  
-**Universidad Nacional de Lomas de Zamora – Facultad de Ingeniería**
+<p align="center">
+  <b>Práctica Profesional Supervisada – Ingeniería Mecatrónica</b><br>
+  <b>Universidad Nacional de Lomas de Zamora – Facultad de Ingeniería</b>
+</p>
 
 ---
 
@@ -32,7 +34,7 @@ Este repositorio documenta el desarrollo de una **Práctica Profesional Supervis
 La mejora consistió en incorporar un **modo de prensado limitado** configurable desde HMI mediante un **sensor magnético ON/OFF (IFM MR0120)**, manteniendo la **secuencia** y **temporizaciones originales** del ciclo.
 
 <p align="center">
-  <img src="images/prensa_contexto.png" alt="Prensa en paletizadora" width="500"/>
+  <img src="images/prensa_contexto.png" alt="Prensa en paletizadora" width="520">
 </p>
 
 ---
@@ -59,11 +61,15 @@ La solución permite detener el avance del cilindro en una posición intermedia 
 - **Electroválvula:** 5/3 centro cerrado  
 - **Sensor agregado:** IFM MR0120 (magnético ON/OFF)
 
-📷 **Zona de contacto efectiva (vista superior / capa prensada)**  
-![Zona de contacto](imagenes/capa_contacto.jpg)
+<p align="center">
+  📷 <b>Zona de contacto efectiva (vista superior / capa prensada)</b><br>
+  <img src="imagenes/capa_contacto.jpg" alt="Zona de contacto" width="520">
+</p>
 
-📷 **(Opcional) Conjunto / croquis mecánico**  
-![Mecanismo prensa](imagenes/mecanismo_prensa.jpg)
+<p align="center">
+  📷 <b>(Opcional) Conjunto / croquis mecánico</b><br>
+  <img src="imagenes/mecanismo_prensa.jpg" alt="Mecanismo prensa" width="520">
+</p>
 
 ---
 
@@ -105,7 +111,7 @@ La solución permite detener el avance del cilindro en una posición intermedia 
 - En LIMITADO, al activarse el sensor se impide continuar el avance.
 
 <p align="center">
-  <img src="images/rung_y12_y34.png" alt="Rungs principales (avance/retorno)" width="500"/>
+  <img src="images/rung_y12_y34.png" alt="Rungs principales (avance/retorno)" width="700">
 </p>
 
 **Retroceso (Y34):**
@@ -124,7 +130,7 @@ Se agregaron dos botones con indicación por lámpara:
 - **Prensa LIMITADA:** escribe `1` en `HOST3:00610.09`
 
 <p align="center">
-  <img src="images/hmi_modo.png" alt="HMI" width="400"/>
+  <img src="images/hmi_modo.png" alt="HMI - Selección FULL/LIMITADO" width="520">
 </p>
 
 ---
@@ -134,7 +140,7 @@ Se agregaron dos botones con indicación por lámpara:
 El sensor IFM MR0120 se monta sobre el cuerpo del cilindro y detecta el imán del pistón en una posición intermedia definida en la puesta a punto.
 
 <p align="center">
-  <img src="images/sensor_mr0120.jpg" alt="Sensor montado en cilindro" width="400"/>
+  <img src="images/sensor_mr0120.jpg" alt="Sensor montado en cilindro" width="520">
 </p>
 
 **Conexión eléctrica (lógica PLC):**
@@ -175,11 +181,15 @@ Se recomienda instalar una **válvula estranguladora antirretorno** para regular
 Se calculó la fuerza de avance del cilindro a 6,5 bar y se verificó el conjunto mediante simulación estática (tensiones y desplazamientos).  
 El análisis permitió concluir que la estructura trabaja con margen de seguridad y que el fenómeno de sobreprensado se relaciona principalmente con el recorrido impuesto y la compresibilidad del producto.
 
-📷 **Configuración / reacciones (referencia de carga)**  
-![Reacciones](imagenes/fea_reacciones.png)
+<p align="center">
+  📷 <b>Configuración / reacciones (referencia de carga)</b><br>
+  <img src="imagenes/fea_reacciones.png" alt="Reacciones (FEA)" width="620">
+</p>
 
-📷 **Resultado (deformación / criterio comparativo)**  
-![Deformación](imagenes/fea_deformacion.png)
+<p align="center">
+  📷 <b>Resultado (deformación / criterio comparativo)</b><br>
+  <img src="imagenes/fea_deformacion.png" alt="Deformación (FEA)" width="620">
+</p>
 
 ---
 
@@ -219,6 +229,7 @@ anexos/      → Documentación complementaria
 
 > ⚠️ Importante: este repositorio documenta una mejora sobre un equipo industrial real. Cualquier puesta en marcha debe respetar permisos, procedimientos internos y condiciones de seguridad del área.
 
+---
 
 ### HMI (Omron NS5 – CX-Designer)
 1. Abrí **CX-Designer**.
@@ -231,6 +242,7 @@ anexos/      → Documentación complementaria
    - Botón **Prensa LIMITADA** → escribe `1` en `HOST3:00610.09`
    - Lámparas asociadas al estado del bit `610.09`
 
+---
 
 ### Sensor IFM MR0120 (montaje y conexión resumida)
 - **Conexión lógica PLC:** `CIO 3.14` (`S_PRENSA_LIMIT`)
@@ -240,7 +252,6 @@ anexos/      → Documentación complementaria
   - **Borne:** **Entrada digital Nº14** del módulo
 
 > 🔧 Recomendación: ajustar una **válvula estranguladora antirretorno** para controlar la velocidad de avance del cilindro y asegurar detección confiable del sensor sin afectar el prensado.
-
 
 ---
 
@@ -267,14 +278,15 @@ anexos/      → Documentación complementaria
 - `anexos/*.pdf` → Catálogos, fichas técnicas, documentación complementaria.
 - `imagenes/*` → Imágenes utilizadas en este README.
 
-
 ---
 
 ## 👤 Autor
 
-**Alejo Daniel Salto**  
-Ingeniería Mecatrónica – Universidad Nacional de Lomas de Zamora (FI-UNLZ)
+<p align="center">
+  <b>Alejo Daniel Salto</b><br>
+  Ingeniería Mecatrónica – Universidad Nacional de Lomas de Zamora (FI-UNLZ)
+</p>
 
 <p align="center">
-  <img src="images/logo_fiunlz.png" alt="Logo FiUNLZ" width="400"/>
+  <img src="images/logo_fiunlz.png" alt="Logo FiUNLZ" width="320">
 </p>
