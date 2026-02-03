@@ -34,7 +34,7 @@ Este repositorio documenta el desarrollo de una **Práctica Profesional Supervis
 La mejora consistió en incorporar un **modo de prensado limitado** configurable desde HMI mediante un **sensor magnético ON/OFF (IFM MR0120)**, manteniendo la **secuencia** y **temporizaciones originales** del ciclo.
 
 <p align="center">
-  <img src="images/prensa_contexto.png" alt="Prensa en paletizadora" width="520">
+  <img src="imagenes/prensa_contexto.png" alt="Prensa en paletizadora" width="520">
 </p>
 
 ---
@@ -62,12 +62,10 @@ La solución permite detener el avance del cilindro en una posición intermedia 
 - **Sensor agregado:** IFM MR0120 (magnético ON/OFF)
 
 <p align="center">
-  📷 <b>Zona de contacto efectiva (vista superior / capa prensada)</b><br>
   <img src="imagenes/capa_contacto.jpg" alt="Zona de contacto" width="520">
 </p>
 
 <p align="center">
-  📷 <b>(Opcional) Conjunto / croquis mecánico</b><br>
   <img src="imagenes/mecanismo_prensa.jpg" alt="Mecanismo prensa" width="520">
 </p>
 
@@ -111,7 +109,7 @@ La solución permite detener el avance del cilindro en una posición intermedia 
 - En LIMITADO, al activarse el sensor se impide continuar el avance.
 
 <p align="center">
-  <img src="images/rung_y12_y34.png" alt="Rungs principales (avance/retorno)" width="700">
+  <img src="imagenes/rung_y12_y34.png" alt="Rungs principales (avance/retorno)" width="700">
 </p>
 
 **Retroceso (Y34):**
@@ -130,7 +128,7 @@ Se agregaron dos botones con indicación por lámpara:
 - **Prensa LIMITADA:** escribe `1` en `HOST3:00610.09`
 
 <p align="center">
-  <img src="images/hmi_modo.png" alt="HMI - Selección FULL/LIMITADO" width="520">
+  <img src="imagenes/hmi_modo.png" alt="HMI - Selección FULL/LIMITADO" width="520">
 </p>
 
 ---
@@ -140,7 +138,7 @@ Se agregaron dos botones con indicación por lámpara:
 El sensor IFM MR0120 se monta sobre el cuerpo del cilindro y detecta el imán del pistón en una posición intermedia definida en la puesta a punto.
 
 <p align="center">
-  <img src="images/sensor_mr0120.jpg" alt="Sensor montado en cilindro" width="520">
+  <img src="imagenes/sensor_mr0120.jpg" alt="Sensor montado en cilindro" width="520">
 </p>
 
 **Conexión eléctrica (lógica PLC):**
@@ -288,5 +286,5 @@ anexos/      → Documentación complementaria
 </p>
 
 <p align="center">
-  <img src="images/logo_fiunlz.png" alt="Logo FiUNLZ" width="320">
+  <img src="imagenes/logo_fiunlz.png" alt="Logo FiUNLZ" width="320">
 </p>
