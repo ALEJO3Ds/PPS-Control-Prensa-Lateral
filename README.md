@@ -34,7 +34,7 @@ Este repositorio documenta el desarrollo de una **Práctica Profesional Supervis
 La mejora consistió en incorporar un **modo de prensado limitado** configurable desde HMI mediante un **sensor magnético ON/OFF (IFM MR0120)**, manteniendo la **secuencia** y **temporizaciones originales** del ciclo.
 
 <p align="center">
-  <img src="imagenes/prensa_contexto.png" alt="Prensa en paletizadora" width="520">
+  <img src="imagenes/prensa_contexto.jpg" alt="Prensa en paletizadora" width="520">
 </p>
 
 ---
