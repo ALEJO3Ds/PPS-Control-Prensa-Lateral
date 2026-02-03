@@ -64,7 +64,6 @@ La solución permite detener el avance del cilindro en una posición intermedia 
 
 <p align="center">
   <b>Conjunto mecánico de la prensa lateral</b><br>
-  <em>Comparación entre implementación real y croquis/esquema del mecanismo</em>
 </p>
 
 <table align="center">
@@ -74,7 +73,7 @@ La solución permite detener el avance del cilindro en una posición intermedia 
       <em>Implementación real en paletizadora</em>
     </td>
     <td align="center">
-      <img src="imagenes/capa_contacto.jpg" alt="Croquis del mecanismo de prensado" width="420"><br>
+      <img src="imagenes/capa_contacto.jpg" alt="Croquis del mecanismo de prensado" width="410"><br>
       <em>Croquis / esquema mecánico</em>
     </td>
   </tr>
