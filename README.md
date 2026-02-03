@@ -72,7 +72,7 @@ La solución permite detener el avance del cilindro en una posición intermedia 
       <em>Implementación real en paletizadora</em>
     </td>
     <td align="center">
-      <img src="imagenes/capa_contacto.jpg" alt="Croquis del mecanismo de prensado" width="320"><br>
+      <img src="imagenes/capa_contacto.jpg" alt="Croquis del mecanismo de prensado" width="400"><br>
       <em>Croquis / esquema mecánico</em>
     </td>
   </tr>
@@ -190,14 +190,22 @@ Se calculó la fuerza de avance del cilindro a 6,5 bar y se verificó el conjunt
 El análisis permitió concluir que la estructura trabaja con margen de seguridad y que el fenómeno de sobreprensado se relaciona principalmente con el recorrido impuesto y la compresibilidad del producto.
 
 <p align="center">
-  📷 <b>Configuración / reacciones (referencia de carga)</b><br>
-  <img src="imagenes/fea_reacciones.png" alt="Reacciones (FEA)" width="620">
+  <b>Análisis por elementos finitos (FEA)</b>
 </p>
 
-<p align="center">
-  📷 <b>Resultado (deformación / criterio comparativo)</b><br>
-  <img src="imagenes/fea_deformacion.png" alt="Deformación (FEA)" width="620">
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="imagenes/fea_reacciones.png" alt="Configuración de cargas y reacciones (FEA)" width="300"><br>
+      <em>Configuración de cargas y reacciones</em>
+    </td>
+    <td align="center">
+      <img src="imagenes/fea_deformacion.png" alt="Resultado de deformación (FEA)" width="300"><br>
+      <em>Resultado de deformación – criterio comparativo</em>
+    </td>
+  </tr>
+</table>
+
 
 ---
 
